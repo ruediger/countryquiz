@@ -101,3 +101,7 @@ function submit_guess(countrycode) {
     svgobject.setAttribute("style", "fill: Lavender;");
   }
 }
+
+function check() {
+  alert("not yet implemented"); // TODO
+}
