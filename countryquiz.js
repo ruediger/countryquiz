@@ -39,6 +39,8 @@ function giveguess(event, countrycode) {
   label.appendChild(document.createTextNode("Name of country"));
   form.appendChild(label);
 
+  form.appendChild(document.createElementNS(xhtmluri, "br"));
+
   var input = document.createElementNS(xhtmluri, "input");
   input.setAttribute("type", "text");
   input.setAttribute("name", "countryname_input");
@@ -51,12 +53,14 @@ function giveguess(event, countrycode) {
   var submit = document.createElementNS(xhtmluri, "input");
   submit.setAttribute("type", "submit");
   submit.setAttribute("value", "Submit");
+  submit.setAttribute("class", "btn");
   submit.setAttribute("onclick", "submit_guess('"+countrycode+"')");
   form.appendChild(submit);
 
   var cancel = document.createElementNS(xhtmluri, "input");
   cancel.setAttribute("type", "button");
   cancel.setAttribute("value", "Cancel");
+  cancel.setAttribute("class", "btn");
   cancel.setAttribute("onclick", "close_guess_dialog('"+countrycode+"')");
   form.appendChild(cancel);
   // } form
@@ -66,7 +70,7 @@ function giveguess(event, countrycode) {
     alert("manip not found");
   }
   manip.appendChild(div);
-  input.focus(); // in case HTML5's autofocus is not supported
+  input.focus(); // in case html5's autofocus is not supported
 
   var svgobject = document.getElementById(countrycode);
   if(!svgobject) {
