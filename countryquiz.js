@@ -162,6 +162,8 @@ function giveguess(event, countrycode) {
   div.setAttribute("id", "guess_box");
   // div {
   var form = document.createElementNS(xhtmluri, "form");
+  form.setAttribute("onkeypress", "submit_guess_key(event,'" + countrycode + "')");
+  form.setAttribute("onsubmit", "return false;");
   div.appendChild(form);
   // form {
 
@@ -203,7 +205,7 @@ function giveguess(event, countrycode) {
   nextcountry.setAttribute("type", "button");
   nextcountry.setAttribute("value", "Next");
   nextcountry.setAttribute("class", "btn");
-  nextcountry.setAttribute("onclick", "submit_guess('"+countrycode+"');next(Event, '"+countrycode+"');");
+  nextcountry.setAttribute("onclick", "submit_guess('"+countrycode+"');next(event, '"+countrycode+"');");
   form.appendChild(nextcountry);
   // } form
   // } div
@@ -215,6 +217,12 @@ function giveguess(event, countrycode) {
   input.focus(); // in case html5's autofocus is not supported
 
   set_style(countrycode, "fill: lightblue;");
+}
+
+function submit_guess_key(event, countrycode) {
+  if(event.keyCode == 13) {
+    submit_guess(countrycode);
+  }
 }
 
 function submit_guess(countrycode) {
