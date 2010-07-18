@@ -1,5 +1,18 @@
 const xhtmluri = "http://www.w3.org/1999/xhtml";
 
+function svg_style(countrycode, style) {
+  var svgobject = document.getElementById(countrycode);
+  if(!svgobject) {
+    alert("object with id " + countrycode + " not found");
+  }
+  if(!style) {
+    svgobject.removeAttribute("style");
+  }
+  else {
+    svgobject.setAttribute("style", style);
+  }
+}
+
 var last_guess_country = '';
 var guesses = {};
 
@@ -16,11 +29,7 @@ function close_guess_dialog(countrycode) {
     manip.removeChild(manip.firstChild);
   }
 
-  var svgobject = document.getElementById(countrycode);
-  if(!svgobject) {
-    alert("object with id " + countrycode + " not found");
-  }
-  svgobject.removeAttribute("style");
+  svg_style(countrycode, null);
 }
 
 function giveguess(event, countrycode) {
@@ -37,7 +46,7 @@ function giveguess(event, countrycode) {
 
   var label = document.createElementNS(xhtmluri, "label");
   label.setAttribute("for", "countryname_input");
-  label.appendChild(document.createTextNode("Name of country"));
+  label.appendChild(document.createTextNode("Your guess"));
   form.appendChild(label);
 
   form.appendChild(document.createElementNS(xhtmluri, "br"));
@@ -47,6 +56,7 @@ function giveguess(event, countrycode) {
   input.setAttribute("name", "countryname_input");
   input.setAttribute("id", "countryname_input");
   input.setAttribute("autofocus", "autofocus"); // html5
+  input.setAttribute("placeholder", "country name"); // html5
   if(guesses[countrycode]) {
     input.setAttribute("value", guesses[countrycode]);
   }
@@ -76,11 +86,7 @@ function giveguess(event, countrycode) {
   manip.appendChild(div);
   input.focus(); // in case html5's autofocus is not supported
 
-  var svgobject = document.getElementById(countrycode);
-  if(!svgobject) {
-    alert("object with id " + countrycode + " not found");
-  }
-  svgobject.setAttribute("style", "fill: lightblue;");
+  svg_style(countrycode, "fill: lightblue;");
 }
 
 function submit_guess(countrycode) {
@@ -94,14 +100,21 @@ function submit_guess(countrycode) {
   }
   else {
     guesses[countrycode] = guess.value;
+    svg_style(countrycode, "fill: Lavender;");
+  }
+}
+
+function check() {
+/*  for(var countrycode in guesses) {
     var svgobject = document.getElementById(countrycode);
     if(!svgobject) {
       alert("object with id " + countrycode + " not found");
     }
     svgobject.setAttribute("style", "fill: Lavender;");
   }
-}
 
-function check() {
-  alert("not yet implemented"); // TODO
+  var result_div = document.getElementById("result");
+  if(!result_div) {
+    alert("couldn't find div#result");
+  }*/
 }
