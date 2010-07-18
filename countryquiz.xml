@@ -36,6 +36,7 @@
       <span id="solutions"></span>
       <form>
         <input type="submit" class="btn" value="Submit" onclick="check();"/>
+        <input type="button" class="btn" value="Next Country" onclick="next(Event);"/>
       </form>
     </div>
     <div id="result"></div>

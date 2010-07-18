@@ -120,6 +120,34 @@ function close_guess_dialog(countrycode) {
   remove_style(countrycode);
 }
 
+function next(event, last_country) {
+  if(!last_country) {
+    last_country = last_guess_country;
+  }
+  if(last_country) {
+    for(var i = 0; i < countries.length; ++i) {
+      if(countries[i].iso == last_country) {
+        ++i;
+        for(; i < countries.length; ++i) {
+          if(!guesses[countries[i].iso]) {
+            break;
+          }
+        }
+        giveguess(event, countries[i].iso);
+        return;
+      }
+    }
+  }
+  else {
+    for(var i = 0; i < countries.length; ++i) {
+      if(!guesses[countries[i].iso]) {
+        break;
+      }
+    }
+    giveguess(event, countries[i].iso);
+  }
+}
+
 function giveguess(event, countrycode) {
   if(result_mode) {
     return;
@@ -169,6 +197,13 @@ function giveguess(event, countrycode) {
   cancel.setAttribute("class", "btn");
   cancel.setAttribute("onclick", "close_guess_dialog('"+countrycode+"')");
   form.appendChild(cancel);
+
+  var nextcountry = document.createElementNS(xhtmluri, "input");
+  nextcountry.setAttribute("type", "button");
+  nextcountry.setAttribute("value", "Next");
+  nextcountry.setAttribute("class", "btn");
+  nextcountry.setAttribute("onclick", "submit_guess('"+countrycode+"');next(Event, '"+countrycode+"');");
+  form.appendChild(nextcountry);
   // } form
   // } div
   var manip = document.getElementById("manip");
