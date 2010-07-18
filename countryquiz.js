@@ -256,7 +256,7 @@ function check() {
   restart.setAttribute("onclick", "restart_quiz()");
   form.appendChild(restart);
 
-  var result_box = document.createElementNS(xhtmluri, "result_box");
+  var result_box = document.createElementNS(xhtmluri, "div");
   result_box.setAttribute("id", "result_box");
   result_box.appendChild(text);
   result_box.appendChild(form);
