@@ -1,6 +1,7 @@
 const xhtmluri = "http://www.w3.org/1999/xhtml";
 
 var last_guess_country = '';
+var guesses = {};
 
 function close_guess_dialog(countrycode) {
   if(!countrycode || countrycode == '') {
@@ -46,6 +47,9 @@ function giveguess(event, countrycode) {
   input.setAttribute("name", "countryname_input");
   input.setAttribute("id", "countryname_input");
   input.setAttribute("autofocus", "autofocus"); // html5
+  if(guesses[countrycode]) {
+    input.setAttribute("value", guesses[countrycode]);
+  }
   form.appendChild(input);
 
   form.appendChild(document.createElementNS(xhtmluri, "br"));
@@ -78,8 +82,6 @@ function giveguess(event, countrycode) {
   }
   svgobject.setAttribute("style", "fill: lightblue;");
 }
-
-var guesses = {};
 
 function submit_guess(countrycode) {
   var guess = document.getElementById("countryname_input");
