@@ -46,10 +46,9 @@ var last_guess_country = '';
 var answers = {};
 var result_mode = false;
 
-// TODO alt
 const countries = [
   { name: "burkina faso",                     iso: "bf", alt: ["burkina", "republic of upper volta"] },
-  { name: "libyan arab jamahiriya",           iso: "ly", alt: ["libya"] },
+  { name: "libyan arab jamahiriya",           iso: "ly", alt: ["libya", "ليبيا", "ⵍⵉⴱⵢⴰ", "great socialist people's libyan arab jamahiriya", "الجماهيرية العربية الليبية الشعبية الإشتراكية العظمى", "al-jamāhīriyyah al-ʿarabiyyah al-lībiyyah aš-šaʿbiyyah al-ištirākiyyah al-ʿuẓmā"] },
   { name: "madagascar",                       iso: "mg", alt: ["republic of madagascar", "repoblikan'i madagasikara", "république de madagascar", "malagasy republic", "république malgache"] },
   { name: "cote d'ivoire",                    iso: "ci", alt: ["côte d'ivoire", "ivory coast"] },
   { name: "algeria",                          iso: "dz", alt: ["الجزائر", "ⴷⵥⴰⵢⴻⵔ", "dzayer", "algérie", "people's democratic republic of algeria", "الجمهورية الجزائرية الديمقراطية الشّعبية", "al jumhuriyya al jazā'iriyya ad-dīmuqrāţiyya ash sha'biyya"] },
@@ -64,44 +63,44 @@ const countries = [
   { name: "ghana",                            iso: "gh", alt: ["republic of ghana"] },
   { name: "uganda",                           iso: "ug", alt: ["republic of uganda", "jamhuri ya uganda"] },
   { name: "mozambique",                       iso: "mz", alt: ["republic of mozambique", "república de moçambique", "moçambique"] },
-  { name: "mauritania",                       iso: "mr", alt: [] },
-  { name: "angola",                           iso: "ao", alt: [] },
-  { name: "sudan",                            iso: "sd", alt: [] },
+  { name: "mauritania",                       iso: "mr", alt: ["موريتانيا", "gànnaar", "murutaane", "moritani", "mauritanie", "islamic republic of mauritania", "الجمهورية الإسلامية الموريتانية", "al-jumhūriyyah al-islāmiyyah al-mūrītāniyyah", "republik bu lislaamu bu gànnaar", "république islamique de mauritanie"] },
+  { name: "angola",                           iso: "ao", alt: ["republic of angola", "república de angola"] },
+  { name: "sudan",                            iso: "sd", alt: ["السودان", "republic of the sudan"] },
   { name: "niger",                            iso: "ne", alt: ["jamhuriyar nijar", "nijar", "république du niger", "republic of niger"] },
   { name: "zambia",                           iso: "zm", alt: ["republic of zambia"] },
   { name: "ethiopia",                         iso: "et", alt: ["ኢትዮጵያ", "federal democratic republic of ethiopia", "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ", "ye-ītyōṗṗyā fēdēralāwī dīmōkrāsīyāwī rīpeblīk"] },
   { name: "western sahara",                   iso: "eh", alt: ["sáhara occidental"] },
   { name: "chad",                             iso: "td", alt: ["republic of chad", "tchad", "république du tchad", "جمهورية تشاد ‎", "jumhūriyyat tshād", "تشاد"] },
-  { name: "guinea",                           iso: "gn", alt: [] },
-  { name: "nigeria",                          iso: "ng", alt: [] },
-  { name: "tunisia",                          iso: "tn", alt: [] },
-  { name: "namibia",                          iso: "na", alt: [] },
-  { name: "south africa",                     iso: "za", alt: [] },
-  { name: "egypt",                            iso: "eg", alt: [] },
+  { name: "guinea",                           iso: "gn", alt: ["guinée", "republic of guinea", "république de guinée", "guinea-conakry", "guinée française", "french guinea"] },
+  { name: "nigeria",                          iso: "ng", alt: ["nijeriya", "naíjíríà", "niiseriya", "federal republic of nigeria", "republik nijeriya", "njíkötá óchíchìiwù naíjíríà", "republik federaal bu niiseriya", "àpapọ̀ olómìnira ilẹ̀ nàìjíríà", "jam-huriyar tarayiar nijeriya"] },
+  { name: "tunisia",                          iso: "tn", alt: ["تونس‎", "الجمهورية التونسية", "tunisian republic"] },
+  { name: "namibia",                          iso: "na", alt: ["republic of namibia", "republiek van namibië", "republik namibia", "namibië"] },
+  { name: "south africa",                     iso: "za", alt: ["suid-afrika", "republic of south africa","republiek van suid-afrika", "iriphabliki yesewula afrika", "iriphabliki yomzantsi afrika", "iriphabhuliki yaseningizimu afrika", "iriphabhulikhi yeningizimu afrika", "repabliki ya afrika-borwa", "rephaboliki ya afrika borwa", "rephaboliki ya aforika borwa", "riphabliki ra afrika dzonga", "riphabuḽiki ya afurika tshipembe"] },
+  { name: "egypt",                            iso: "eg", alt: ["مصر‎", "مِصْر", "مَصْر", "Ⲭⲏⲙⲓ", "𓆎𓅓𓏏𓊖", "arab republic of egypt", "جمهورية مصر العربية"] },
   { name: "tanzania",                         iso: "tz", alt: ["united republic of tanzania"] },
-  { name: "equatorial guinea",                iso: "gq", alt: [] },
-  { name: "lesotho",                          iso: "ls", alt: [] },
-  { name: "burundi",                          iso: "bi", alt: [] },
-  { name: "djibouti",                         iso: "dj", alt: [] },
+  { name: "equatorial guinea",                iso: "gq", alt: ["guinea ecuatorial", "guinée équatoriale", "guiné equatorial", "república de guinea ecuatorial", "république de guinée équatoriale", "república da guiné equatorial"] },
+  { name: "lesotho",                          iso: "ls", alt: ["kingdom of lesotho", "muso oa lesotho"] },
+  { name: "burundi",                          iso: "bi", alt: ["republic of burundi", "republika y'u burundi", "république du burundi"] },
+  { name: "djibouti",                         iso: "dj", alt: ["jibuti", "جيبوتي", "jabuuti", "republic of djibouti", "jumhūriyyat jībūtī", "jamhuuriyadda jabuuti", "république de djibouti", "gabuutih ummuuno"] },
   { name: "congo",                            iso: "cg", alt: ["republic of congo"] },
-  { name: "rwanda",                           iso: "rw", alt: [] },
-  { name: "senegal",                          iso: "sn", alt: [] },
+  { name: "rwanda",                           iso: "rw", alt: ["republic of rwanda", "repubulika y'u rwanda", "république du rwanda"] },
+  { name: "senegal",                          iso: "sn", alt: ["sénégal", "senegaal", "republic of senegal", "république du sénégal", "réewum senegaal"] },
   { name: "togo",                             iso: "tg", alt: ["the togolese republic", "république togolaise"] },
-  { name: "gabon",                            iso: "ga", alt: [] },
-  { name: "malawi",                           iso: "mw", alt: [] },
+  { name: "gabon",                            iso: "ga", alt: ["gabonese republic", "république gabonaise"] },
+  { name: "malawi",                           iso: "mw", alt: ["nyasaland", "republic of malawi", "republic of malaŵi", "chalo cha malawi", "dziko la malaŵi"] },
   { name: "morocco",                          iso: "ma", alt: ["kingdom of morocco", "amerruk", "murakuc"] },
-  { name: "liberia",                          iso: "lr", alt: [] },
+  { name: "liberia",                          iso: "lr", alt: ["republic of liberia"] },
   { name: "central african republic",         iso: "cf", alt: ["car"] },
   { name: "zimbabwe",                         iso: "zw", alt: ["republic of zimbabwe", "southern rhodesia", "republic of rhodesia", "zimbabwe rhodesia"] },
   { name: "benin",                            iso: "bj", alt: ["republic of benin", "bénin", "république du bénin", "orílẹ̀-èdè olómìnira ilẹ̀ benin"] },
-  { name: "eritrea",                          iso: "er", alt: [] },
-  { name: "swaziland",                        iso: "sz", alt: [] },
-  { name: "gambia",                           iso: "gm", alt: [] },
-  { name: "cape verde",                       iso: "cv", alt: [] },
-  { name: "comoros",                          iso: "km", alt: [] },
-  { name: "mauritius",                        iso: "mu", alt: [] },
+  { name: "eritrea",                          iso: "er", alt: ["ኤርትራ", "إرتريا", "state of eritrea", "ሃገረ ኤርትራ", "hagere ertra", "دولة إرتريا", "dawlat iritrīya"] },
+  { name: "swaziland",                        iso: "sz", alt: ["ngwane", "kingdom of swaziland", "umbuso weswatini"] },
+  { name: "gambia",                           iso: "gm", alt: ["the gambia", "the republic of the gambia"] },
+  { name: "cape verde",                       iso: "cv", alt: ["cabo verde", "republic of cape verde", "república de cabo verde"] },
+  { name: "comoros",                          iso: "km", alt: ["جزر القمر", "union des comores", "union of the comoros", "الاتّحاد القمريّ", "al-ittiḥād al-qamariyy"] },
+  { name: "mauritius",                        iso: "mu", alt: ["maurice", "moris", "republic of mauritius", "republik moris", "république de maurice"] },
   { name: "sao tome and principe",            iso: "st", alt: ["são tomé and príncipe", "democratic republic of são tomé and príncipe", "democratic republic of sao tome and principe"] },
-  { name: "seychelles",                       iso: "sc", alt: [] }
+  { name: "seychelles",                       iso: "sc", alt: ["republic of seychelles", "repiblik sesel", "sesel", "république des seychelles"] }
 ];
 
 function close_guess_dialog(countrycode) {
@@ -287,14 +286,16 @@ function show_solution(event, countrycode) {
   last_guess_country = countrycode;
   
   var div = document.createElementNS(xhtmluri, "div");
-  div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  if(event && event.clientX) {
+    div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  }
   div.setAttribute("id", "solution_box");
   
   var country = get_country(countrycode);
   
-  var text = "This country is named '" + country.name + "'";
+  var text = "This country is named '" + country.name + "'.";
   if(country.alt.length > 0) {
-    text += " (alternative names and spellings are: ";
+    text += " (Alternative names and spellings are: ";
     var i = 0;
     for(; i < country.alt.length - 1; ++i) {
       text += "'" + country.alt[i] + "', ";
