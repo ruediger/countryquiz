@@ -246,16 +246,6 @@ function check_guess(guess_, country) {
   return false;
 }
 
-function number_of_guesses() {
-  var len = 0;
-  for(var i in obj) {
-    if(obj.hasOwnProperty(i)) {
-      ++len;
-    }
-  }
-  return len;
-}
-
 function get_country(countrycode) {
   for each(var country in countries) { // TODO slow maybe use assoc array
     if(country.iso == countrycode) {
@@ -325,11 +315,23 @@ function show_solution(event, countrycode) {
   set_style(countrycode, "fill: lightblue;");
 }
 
+function number_of_guesses() {
+  var len = 0;
+  for(var i in guesses) {
+    if(guesses.hasOwnProperty(i)) {
+      ++len;
+    }
+  }
+  return len;
+}
+
 function check() {
-  if(number_of_guesses == 0) {
+  if(number_of_guesses() == 0) {
     alert("you should at least try to guess one country name!");
     return;
   }
+
+  close_guess_dialog(last_guess_country);
 
   result_mode = true;
 
