@@ -1,15 +1,44 @@
 const xhtmluri = "http://www.w3.org/1999/xhtml";
 
-function svg_style(countrycode, style) {
-  var svgobject = document.getElementById(countrycode);
+function remove_style(countrycode) {
+  var svgobject = document.getElementById("map_tmp_style");
   if(!svgobject) {
-    alert("object with id " + countrycode + " not found");
+    alert("svg tmp style not found");
   }
-  if(!style) {
-    svgobject.removeAttribute("style");
+  if(!svgobject.firstChild) {
+    return;
+  }
+  var svgstyle = svgobject.firstChild.nodeValue;
+  var re = new RegExp("^\." + countrycode, "mg");
+  var pos = svgstyle.search(re);
+  if(pos != -1) {
+    var lhs = svgstyle.substring(0, pos);
+    svgstyle = svgstyle.substring(pos);
+    pos = svgstyle.search(/\}/, "g");
+    if(pos == -1) {
+      alert("css error");
+    }
+    svgstyle = lhs + svgstyle.substring(pos+1);
+    svgobject.replaceChild(document.createTextNode(svgstyle), svgobject.firstChild);
+  }
+}
+
+function set_style(countrycode, style) {
+  var svgobject = document.getElementById("map_tmp_style");
+  if(!svgobject) {
+    alert("svg tmp style not found");
+  }
+
+  var re = new RegExp("^\." + countrycode, "mg");
+  const newstyle = '\n.' + countrycode + ' {\n' + style + '\n}\n';
+  if(svgobject.firstChild) {
+    var svgstyle = svgobject.firstChild.nodeValue;
+    remove_style(countrycode);
+    svgstyle += newstyle;
+    svgobject.replaceChild(document.createTextNode(svgstyle), svgobject.firstChild);
   }
   else {
-    svgobject.setAttribute("style", style);
+    svgobject.appendChild(document.createTextNode(newstyle));
   }
 }
 
@@ -88,7 +117,7 @@ function close_guess_dialog(countrycode) {
     manip.removeChild(manip.firstChild);
   }
 
-  svg_style(countrycode, null);
+  remove_style(countrycode);
 }
 
 function giveguess(event, countrycode) {
@@ -149,7 +178,7 @@ function giveguess(event, countrycode) {
   manip.appendChild(div);
   input.focus(); // in case html5's autofocus is not supported
 
-  svg_style(countrycode, "fill: lightblue;");
+  set_style(countrycode, "fill: lightblue;");
 }
 
 function submit_guess(countrycode) {
@@ -164,7 +193,7 @@ function submit_guess(countrycode) {
   }
   else {
     guesses[countrycode] = guess.value;
-    svg_style(countrycode, "fill: Lavender;");
+    set_style(countrycode, "fill: Lavender;");
   }
 }
 
@@ -190,16 +219,16 @@ function check() {
   for each(var country in countries) {
     if(guesses[country.iso]) {
       if(check_guess(guesses[country.iso], country)) {
-        svg_style(country.iso, "fill: Green;");
+        set_style(country.iso, "fill: Green;");
         ++correct;
       }
       else {
-        svg_style(country.iso, "fill: Red;");
+        set_style(country.iso, "fill: Red;");
         ++wrong;
       }
     }
     else {
-      svg_style(country.iso, "fill: Tomato;");
+      set_style(country.iso, "fill: Tomato;");
     }
   }
 
@@ -251,8 +280,12 @@ function restart_quiz() {
   guesses = {};
   last_guess_country = '';
 
-  for each(var country in countries) {
-    svg_style(country.iso);
+  var svgobject = document.getElementById("map_tmp_style");
+  if(!svgobject) {
+    alert("svg tmp style not found");
+  }
+  if(svgobject.firstChild) {
+    svgobject.removeChild(svgobject.firstChild);
   }
 
   result_mode = false;
