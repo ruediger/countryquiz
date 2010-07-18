@@ -11,7 +11,9 @@ function close_guess_dialog(countrycode) {
   if(!manip) {
     alert("manip not found");
   }
-  manip.removeChild(manip.firstChild);
+  else if(manip.firstChild) {
+    manip.removeChild(manip.firstChild);
+  }
 
   var svgobject = document.getElementById(countrycode);
   if(!svgobject) {
@@ -40,6 +42,7 @@ function giveguess(event, countrycode) {
   var input = document.createElementNS(xhtmluri, "input");
   input.setAttribute("type", "text");
   input.setAttribute("name", "countryname_input");
+  input.setAttribute("id", "countryname_input");
   form.appendChild(input);
 
   form.appendChild(document.createElementNS(xhtmluri, "br"));
@@ -70,7 +73,23 @@ function giveguess(event, countrycode) {
   svgobject.setAttribute("style", "fill: lightblue;");
 }
 
+var guesses = {};
+
 function submit_guess(countrycode) {
-  
+  var guess = document.getElementById("countryname_input");
   close_guess_dialog(countrycode);
+  if(!guess) {
+    alert("countryname_input not found");
+  }
+  if(guess.value == null || guess.value == '') {
+    delete guesses[countrycode];
+  }
+  else {
+    guesses[countrycode] = guess.value;
+    var svgobject = document.getElementById(countrycode);
+    if(!svgobject) {
+      alert("object with id " + countrycode + " not found");
+    }
+    svgobject.setAttribute("style", "fill: Lavender;");
+  }
 }
