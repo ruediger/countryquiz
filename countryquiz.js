@@ -186,7 +186,7 @@ function giveguess(event, countrycode) {
   form.appendChild(document.createElementNS(xhtmluri, "br"));
 
   var submit = document.createElementNS(xhtmluri, "input");
-  submit.setAttribute("type", "submit");
+  submit.setAttribute("type", "button");
   submit.setAttribute("value", "Submit");
   submit.setAttribute("class", "btn");
   submit.setAttribute("onclick", "submit_guess('"+countrycode+"')");
@@ -381,7 +381,7 @@ function check() {
 
   var form = document.createElementNS(xhtmluri, "form");
   var restart = document.createElementNS(xhtmluri, "input");
-  restart.setAttribute("type", "submit");
+  restart.setAttribute("type", "button");
   restart.setAttribute("value", "Restart Quiz");
   restart.setAttribute("class", "btn");
   restart.setAttribute("onclick", "restart_quiz()");
