@@ -89,7 +89,7 @@ const countries = [
   { name: "togo",                                         iso: "tg", alt: [] },
   { name: "gabon",                                        iso: "ga", alt: [] },
   { name: "malawi",                                       iso: "mw", alt: [] },
-  { name: "morocco",                                      iso: "ma", alt: [] },
+  { name: "morocco",                                      iso: "ma", alt: ["kingdom of morocco", "amerruk", "murakuc"] },
   { name: "liberia",                                      iso: "lr", alt: [] },
   { name: "central african republic",                     iso: "cf", alt: [] },
   { name: "zimbabwe",                                     iso: "zw", alt: [] },
@@ -245,7 +245,22 @@ function check_guess(guess_, country) {
   return false;
 }
 
+function number_of_guesses() {
+  var len = 0;
+  for(var i in obj) {
+    if(obj.hasOwnProperty(i)) {
+      ++len;
+    }
+  }
+  return len;
+}
+
 function check() {
+  if(number_of_guesses == 0) {
+    alert("you should at least try to guess one country name!");
+    return;
+  }
+
   result_mode = true;
 
   var correct = 0;
