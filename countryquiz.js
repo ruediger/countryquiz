@@ -178,6 +178,8 @@ function giveguess(event, countrycode) {
   input.setAttribute("type", "text");
   input.setAttribute("name", "countryname_input");
   input.setAttribute("id", "countryname_input");
+  input.setAttribute("class", "inp");
+  input.setAttribute("size", "42");
   input.setAttribute("autofocus", "autofocus"); // html5
   input.setAttribute("placeholder", "country name"); // html5
   if(answers[countrycode]) {
@@ -205,7 +207,7 @@ function giveguess(event, countrycode) {
   nextcountry.setAttribute("type", "button");
   nextcountry.setAttribute("value", "Next");
   nextcountry.setAttribute("class", "btn");
-  nextcountry.setAttribute("onclick", "submit_guess('"+countrycode+"');next(event, '"+countrycode+"');");
+  nextcountry.setAttribute("onclick", "submit_guess('"+countrycode+"');next(Event, '"+countrycode+"');");
   form.appendChild(nextcountry);
   // } form
   // } div
@@ -286,7 +288,7 @@ function show_solution(event, countrycode) {
   
   var div = document.createElementNS(xhtmluri, "div");
   div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
-  div.setAttribute("id", "guess_box");
+  div.setAttribute("id", "solution_box");
   
   var country = get_country(countrycode);
   
@@ -309,7 +311,7 @@ function show_solution(event, countrycode) {
     }
     else {
       sol.setAttribute("class", "wrong");
-      sol.appendChild(document.createTextNode("Your solution " + answers[country.iso] + " was wrong!"));
+      sol.appendChild(document.createTextNode("Your solution '" + answers[country.iso] + "' was wrong!"));
     }
     div.appendChild(document.createElementNS(xhtmluri, "br"));
     div.appendChild(sol);
