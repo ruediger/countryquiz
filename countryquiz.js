@@ -59,7 +59,7 @@ const countries = [
   { name: "sierra leone",                     iso: "sl", alt: ["republic of sierra leone"] },
   { name: "mali",                             iso: "ml", alt: ["republic of mali"] },
   { name: "democratic republic of the congo", iso: "cd", alt: ["dr congo", "drc"] },
-  { name: "somalia",                          iso: "so", alt: ["soomaaliya", "الصومال", "republic of somalia", "jamhuuriyadda soomaaliya", "جمهورية الصومال‎". "jumhūriyyat as-sūmāl‎"] },
+  { name: "somalia",                          iso: "so", alt: ["soomaaliya", "الصومال", "republic of somalia", "jamhuuriyadda soomaaliya", "جمهورية الصومال‎", "jumhūriyyat as-sūmāl‎"] },
   { name: "guinea-bissau",                    iso: "gw", alt: ["republic of guinea-bissau", "república da guiné-bissau", "guiné-bissau"] },
   { name: "ghana",                            iso: "gh", alt: ["republic of ghana"] },
   { name: "uganda",                           iso: "ug", alt: ["republic of uganda", "jamhuri ya uganda"] },
