@@ -256,21 +256,41 @@ function number_of_guesses() {
   return len;
 }
 
-function show_solution(event, countrycode) {
-  close_guess_dialog(last_guess_country);
-  last_guess_country = countrycode;
+function get_country(countrycode) {
+  for each(var country in countries) { // TODO slow maybe use assoc array
+    if(country.iso == countrycode) {
+      return country;
+    }
+  }
+  throw "country not found";
+  return null;
+}
 
+function show_solution(event, countrycode) {
+  if(last_guess_country && last_guess_country != '') {
+    close_guess_dialog(last_guess_country);
+    // restore correct color
+    var oldcountry = get_country(last_guess_country);
+    if(guesses[oldcountry.iso]) {
+      if(check_guess(guesses[oldcountry.iso], oldcountry)) {
+        set_style(oldcountry.iso, "fill: Green;");
+      }
+      else {
+        set_style(oldcountry.iso, "fill: Red;");
+      }
+    }
+    else {
+      set_style(oldcountry.iso, "fill: Tomato;");
+    }
+  }
+  last_guess_country = countrycode;
+  
   var div = document.createElementNS(xhtmluri, "div");
   div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
   div.setAttribute("id", "guess_box");
-
-  var country;
-  for each(country in countries) { // TODO slow maybe use assoc array
-    if(country.iso == countrycode) {
-      break;
-    }
-  }
-
+  
+  var country = get_country(countrycode);
+  
   var text = "This country is named '" + country.name + "'";
   if(country.alt.length > 0) {
     text += " (alternative names and spellings are: ";
