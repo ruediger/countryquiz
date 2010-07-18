@@ -55,77 +55,44 @@
       <defs id='defs1930'></defs>
       <style type='text/css' id='map_style'>
         /*
-        * Below are Cascading Style Sheet (CSS) definitions in use in this file,
-        * which allow easily changing how countries are displayed.
-        *
-        */
-
-        /*
-        * Circles around small countries
-        *
-        * Change opacity to 1 to display all circles.
-        *
-        */
-        .circle
-        {
-        opacity:1;
-        fill:#b9b9b9;
-        fill-opacity:1;
-        stroke:black;
-        stroke-width:0.5;
-        stroke-miterlimit:3.97446823;
-        stroke-dasharray:none;
-        stroke-opacity:1;
-        }
-
-
-        /*
-        * Land
-        */
-        .land
-        {
-        fill: #b9b9b9;
-        fill-opacity: 1;
-        stroke:white;
-        stroke-opacity: 1;
-        stroke-width:0.5;
-        stroke-miterlimit: 3.97446823;
-        stroke-dasharray: none;
+         * Circles around small countries
+         */
+        .circle {
+          opacity:1;
+          fill:#b9b9b9;
+          fill-opacity:1;
+          stroke:black;
+          stroke-width:0.5;
+          stroke-miterlimit:3.97446823;
+          stroke-dasharray:none;
+          stroke-opacity:1;
         }
 
         /*
-        * Styles for coastlines of islands with no borders
-        */
-        .coast
-        {
-        stroke-width: 0.3;
+         * Land
+         */
+        .land {
+          fill: #b9b9b9;
+          fill-opacity: 1;
+          stroke:white;
+          stroke-opacity: 1;
+          stroke-width:0.5;
+          stroke-miterlimit: 3.97446823;
+          stroke-dasharray: none;
         }
 
         /*
-        * Additional style rules
-        *
-        * The following are examples of colouring countries.  You can substitute these with your own styles to colour the countries on the map.
-        *
-        * Color a few countries:
-        *
-        * .gb, .au, .nc
-        * {
-        *    fill:       #ff0000;
-        * }
-        *
-        * Color a few small country circles (and the countries):
-        *
-        * .ms, .ky
-        * {
-        *    opacity:    1;
-        *    fill:       #ff0000;
-        * }
-        *
-        * Remove european territories (i.e. Madeira, Reunion etc.)
-        */
-        .sh, .pt-30, .es-cn, .yt, .re
-        {
-        opacity:    0;
+         * Styles for coastlines of islands with no borders
+         */
+        .coast {
+          stroke-width: 0.3;
+        }
+
+        /*
+         * Remove european territories (i.e. Madeira, Reunion etc.)
+         */
+        .sh, .pt-30, .es-cn, .yt, .re {
+          opacity:    0;
         }
       </style>
       <g transform="matrix(1.594335,0,0,1.594335,-1721.783,-693.262)">
