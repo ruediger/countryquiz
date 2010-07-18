@@ -1,6 +1,29 @@
 const xhtmluri = "http://www.w3.org/1999/xhtml";
 
-function giveguess(event, countrycode) {  
+var last_guess_country = '';
+
+function close_guess_dialog(countrycode) {
+  if(!countrycode || countrycode == '') {
+    return;
+  }
+
+  var manip = document.getElementById("manip");
+  if(!manip) {
+    alert("manip not found");
+  }
+  manip.removeChild(manip.firstChild);
+
+  var svgobject = document.getElementById(countrycode);
+  if(!svgobject) {
+    alert("object with id " + countrycode + " not found");
+  }
+  svgobject.removeAttribute("style");
+}
+
+function giveguess(event, countrycode) {
+  close_guess_dialog(last_guess_country);
+  last_guess_country = countrycode;
+
   var div = document.createElementNS(xhtmluri, "div");
   div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY +
                      'px; background-color:white; border: 1px solid black;');
@@ -34,37 +57,17 @@ function giveguess(event, countrycode) {
   form.appendChild(cancel);
   // } form
   // } div
-
   var manip = document.getElementById("manip");
   if(!manip) {
     alert("manip not found");
   }
-  if(manip.firstChild) {
-    manip.replaceChild(div, manip.firstChild);
-  }
-  else {
-    manip.appendChild(div);
-  }
+  manip.appendChild(div);
 
   var svgobject = document.getElementById(countrycode);
   if(!svgobject) {
     alert("object with id " + countrycode + " not found");
   }
   svgobject.setAttribute("style", "fill: lightblue;");
-}
-
-function close_guess_dialog(countrycode) {
-  var manip = document.getElementById("manip");
-  if(!manip) {
-    alert("manip not found");
-  }
-  manip.removeChild(manip.firstChild);
-
-  var svgobject = document.getElementById(countrycode);
-  if(!svgobject) {
-    alert("object with id " + countrycode + " not found");
-  }
-  svgobject.removeAttribute("style");
 }
 
 function submit_guess(countrycode) {
