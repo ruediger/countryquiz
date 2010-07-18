@@ -360,15 +360,23 @@ function check() {
   var correct_html = document.createElementNS(xhtmluri, "span");
   correct_html.setAttribute("class", "correct");
   correct_html.appendChild(document.createTextNode("" + correct +
-                                                   " (" + Math.round(correct/countries.length*100) + "%) correct"));
+                                                   " countries (" + Math.round(correct/countries.length*100) +
+                                                   "%) correct"));
   text.appendChild(correct_html);
   text.appendChild(document.createTextNode(" and "));
   var wrong_html = document.createElementNS(xhtmluri, "span");
   wrong_html.setAttribute("class", "wrong");
   wrong_html.appendChild(document.createTextNode("" + wrong +
-                                                 " (" + Math.round(wrong/countries.length*100) + "%) wrong"));
+                                                 " countries (" + Math.round(wrong/countries.length*100) + "%) wrong"));
   text.appendChild(wrong_html);
-  text.appendChild(document.createTextNode(" out of " + countries.length + " countries"));
+  text.appendChild(document.createTextNode(" and "));
+  var missing = (countries.length - correct - wrong);
+  var missing_html = document.createElementNS(xhtmluri, "span");
+  missing_html.setAttribute("class", "missing");
+  missing_html.appendChild(document.createTextNode("failed to provide a guess for " + missing + " countries ("
+                                                   + Math.round(missing/countries.length*100) + "%)"));
+  text.appendChild(missing_html);
+  text.appendChild(document.createTextNode(" out of " + countries.length + " countries (percentages are rounded)"));
 
   var form = document.createElementNS(xhtmluri, "form");
   var restart = document.createElementNS(xhtmluri, "input");

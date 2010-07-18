@@ -20,9 +20,13 @@
       .wrong {
         color: red;
       }
+      .missing {
+        color: tomato;
+      }
       #result_box {
         border-style: solid;
         padding: 5px;
+        margin: 10px;
       }
     </style>
     <script src="countryquiz.js" type="text/javascript" />
