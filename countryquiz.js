@@ -71,4 +71,3 @@ function submit_guess(countrycode) {
   
   close_guess_dialog(countrycode);
 }
-

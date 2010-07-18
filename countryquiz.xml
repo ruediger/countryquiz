@@ -276,9 +276,6 @@
 	</g>
       </g>
     </svg>
-    <div id="manip"><div id="empty"></div></div>
-<!--    <div style="position: absolute; left: 927px; top: 441px; background-color:#d0e4fe; border: 1px solid red;">
-      <p>JOOO</p>
-    </div>-->
+    <div id="manip"></div>
   </body>
 </html>
