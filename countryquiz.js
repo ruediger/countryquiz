@@ -238,8 +238,8 @@ function check_guess(guess_, country) {
   if(guess == country.name) {
     return true;
   }
-  for each(var alt in country.alt) {
-    if(guess == alt) {
+  for(var i = 0; i < country.alt.length; ++i) {
+    if(guess == country.alt[i]) {
       return true;
     }
   }
@@ -247,9 +247,10 @@ function check_guess(guess_, country) {
 }
 
 function get_country(countrycode) {
-  for each(var country in countries) { // TODO slow maybe use assoc array
-    if(country.iso == countrycode) {
-      return country;
+  // TODO slow maybe use assoc array
+  for(var i = 0; i < countries.length; ++i) {
+    if(countries[i].iso == countrycode) {
+      return countries[i];
     }
   }
   throw "country not found";
@@ -338,19 +339,19 @@ function check() {
   var correct = 0;
   var wrong = 0;
 
-  for each(var country in countries) {
-    if(guesses[country.iso]) {
-      if(check_guess(guesses[country.iso], country)) {
-        set_style(country.iso, "fill: Green;");
+  for(var i = 0; i < countries.length; ++i) {
+    if(guesses[countries[i].iso]) {
+      if(check_guess(guesses[countries[i].iso], countries[i])) {
+        set_style(countries[i].iso, "fill: Green;");
         ++correct;
       }
       else {
-        set_style(country.iso, "fill: Red;");
+        set_style(countries[i].iso, "fill: Red;");
         ++wrong;
       }
     }
     else {
-      set_style(country.iso, "fill: Tomato;");
+      set_style(countries[i].iso, "fill: Tomato;");
     }
   }
 
