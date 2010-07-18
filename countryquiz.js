@@ -400,6 +400,8 @@ function restart_quiz() {
   }
 
   guesses = {};
+
+  close_guess_dialog(last_guess_country);
   last_guess_country = '';
 
   var svgobject = document.getElementById("map_tmp_style");
