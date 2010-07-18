@@ -150,6 +150,7 @@ function next(event, last_country) {
 
 function giveguess(event, countrycode) {
   if(result_mode) {
+    show_solution(event, countrycode); // in result mode rather show the solution and quit
     return;
   }
 
@@ -255,6 +256,45 @@ function number_of_guesses() {
   return len;
 }
 
+function show_solution(event, countrycode) {
+  close_guess_dialog(last_guess_country);
+  last_guess_country = countrycode;
+
+  var div = document.createElementNS(xhtmluri, "div");
+  div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  div.setAttribute("id", "guess_box");
+
+  var country;
+  for each(country in countries) { // TODO slow maybe use assoc array
+    if(country.iso == countrycode) {
+      break;
+    }
+  }
+
+  div.appendChild(document.createTextNode("This country is named '" + country.name + "'"));
+  if(guesses[country.iso]) {
+    var sol = document.createElementNS(xhtmluri, "span");
+    if(check_guess(guesses[country.iso], country)) {
+      sol.setAttribute("class", "correct");
+      sol.appendChild(document.createTextNode("Your solution was correct!"));
+    }
+    else {
+      sol.setAttribute("class", "wrong");
+      sol.appendChild(document.createTextNode("Your solution " + guesses[country.iso] + " was wrong!"));
+    }
+    div.appendChild(document.createElementNS(xhtmluri, "br"));
+    div.appendChild(sol);
+  }
+
+  var manip = document.getElementById("manip");
+  if(!manip) {
+    alert("manip not found");
+  }
+  manip.appendChild(div);
+
+  set_style(countrycode, "fill: lightblue;");
+}
+
 function check() {
   if(number_of_guesses == 0) {
     alert("you should at least try to guess one country name!");
@@ -286,13 +326,13 @@ function check() {
   text.appendChild(document.createTextNode("You guessed "));
 
   var correct_html = document.createElementNS(xhtmluri, "span");
-  correct_html.setAttribute("id", "correct");
+  correct_html.setAttribute("class", "correct");
   correct_html.appendChild(document.createTextNode("" + correct +
                                                    " (" + Math.round(correct/countries.length*100) + "%) correct"));
   text.appendChild(correct_html);
   text.appendChild(document.createTextNode(" and "));
   var wrong_html = document.createElementNS(xhtmluri, "span");
-  wrong_html.setAttribute("id", "wrong");
+  wrong_html.setAttribute("class", "wrong");
   wrong_html.appendChild(document.createTextNode("" + wrong +
                                                  " (" + Math.round(wrong/countries.length*100) + "%) wrong"));
   text.appendChild(wrong_html);

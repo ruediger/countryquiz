@@ -14,10 +14,10 @@
         margin-left: 5px;
         margin-right: 5px;
       }
-      #correct {
+      .correct {
         color: green;
       }
-      #wrong {
+      .wrong {
         color: red;
       }
       #result_box {
