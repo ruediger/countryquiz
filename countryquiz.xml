@@ -59,7 +59,7 @@
         */
         .circle
         {
-        opacity:0;
+        opacity:1;
         fill:#b9b9b9;
         fill-opacity:1;
         stroke:black;
