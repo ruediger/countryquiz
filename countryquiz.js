@@ -49,7 +49,7 @@ var result_mode = false;
 // TODO alt
 const countries = [
   { name: "burkina faso",                                 iso: "bf", alt: [] },
-  { name: "libyan arab jamahiriya",                       iso: "ly", alt: ["lybia"] },
+  { name: "libyan arab jamahiriya",                       iso: "ly", alt: ["libya"] },
   { name: "madagascar",                                   iso: "mg", alt: [] },
   { name: "cote d'ivoire",                                iso: "ci", alt: ["côte d'ivoire"] },
   { name: "algeria",                                      iso: "dz", alt: [] },
