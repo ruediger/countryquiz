@@ -39,7 +39,12 @@ function giveguess(event, countrycode) {
   if(!manip) {
     alert("manip not found");
   }
-  manip.replaceChild(div, manip.firstChild);
+  if(manip.firstChild) {
+    manip.replaceChild(div, manip.firstChild);
+  }
+  else {
+    manip.appendChild(div);
+  }
 
   var svgobject = document.getElementById(countrycode);
   if(!svgobject) {
@@ -66,3 +71,4 @@ function submit_guess(countrycode) {
   
   close_guess_dialog(countrycode);
 }
+
