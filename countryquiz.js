@@ -271,7 +271,17 @@ function show_solution(event, countrycode) {
     }
   }
 
-  div.appendChild(document.createTextNode("This country is named '" + country.name + "'"));
+  var text = "This country is named '" + country.name + "'";
+  if(country.alt.length > 0) {
+    text += " (alternative names and spellings are: ";
+    var i = 0;
+    for(; i < country.alt.length - 1; ++i) {
+      text += "'" + country.alt[i] + "', ";
+    }
+    text += "'" + country.alt[i] + "')";
+  }
+
+  div.appendChild(document.createTextNode(text));
   if(guesses[country.iso]) {
     var sol = document.createElementNS(xhtmluri, "span");
     if(check_guess(guesses[country.iso], country)) {
