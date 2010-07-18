@@ -104,16 +104,16 @@ const countries = [
 ];
 
 function close_guess_dialog(countrycode) {
-  if(!countrycode || countrycode == '') {
-    return;
-  }
-
   var manip = document.getElementById("manip");
   if(!manip) {
     alert("manip not found");
   }
   else if(manip.firstChild) {
     manip.removeChild(manip.firstChild);
+  }
+
+  if(!countrycode || countrycode == '') {
+    return;
   }
 
   remove_style(countrycode);
@@ -338,12 +338,24 @@ function number_of_answers() {
 }
 
 function check() {
+  close_guess_dialog(last_guess_country);
+
   if(number_of_answers() === 0) {
-    alert("you should at least try to guess one country name!");
+    var manip = document.getElementById("manip");
+    if(!manip) {
+      alert("manip not found");
+    }
+    var div = document.createElementNS(xhtmluri, "div");
+    div.setAttribute("id", "solution_box");
+
+    var p = document.createElementNS(xhtmluri, "p");
+    p.setAttribute("class", "wrong");
+    p.appendChild(document.createTextNode("you should at least try to guess one country name!"));
+    div.appendChild(p);
+
+    manip.appendChild(div);
     return;
   }
-
-  close_guess_dialog(last_guess_country);
 
   result_mode = true;
 
