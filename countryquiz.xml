@@ -5,7 +5,7 @@
     <style type="text/css">
       #guess_box {
         background-color:white;
-        border: 1px solid black;
+        border-style: outset;
         padding: 2px;
       }
       input.btn {
