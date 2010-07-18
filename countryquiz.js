@@ -16,9 +16,10 @@ function svg_style(countrycode, style) {
 var last_guess_country = '';
 var guesses = {};
 
+// TODO alt
 const countries = [
   { name: "burkina faso",                                 iso: "bf", alt: [] },
-  { name: "libyan arab jamahiriya",                       iso: "ly", alt: [] },
+  { name: "libyan arab jamahiriya",                       iso: "ly", alt: ["lybia"] },
   { name: "madagascar",                                   iso: "mg", alt: [] },
   { name: "cote d'ivoire",                                iso: "ci", alt: ["côte d'ivoire"] },
   { name: "algeria",                                      iso: "dz", alt: [] },
@@ -27,7 +28,7 @@ const countries = [
   { name: "kenya",                                        iso: "ke", alt: [] },
   { name: "sierra leone",                                 iso: "sl", alt: [] },
   { name: "mali",                                         iso: "ml", alt: [] },
-  { name: "congo, the democratic republic of the",        iso: "cd", alt: [] },
+  { name: "congo",                                        iso: "cd", alt: ["congo, the democratic republic of the", "dr congo"] },
   { name: "somalia",                                      iso: "so", alt: [] },
   { name: "guinea-bissau",                                iso: "gw", alt: [] },
   { name: "ghana",                                        iso: "gh", alt: [] },
@@ -47,7 +48,7 @@ const countries = [
   { name: "namibia",                                      iso: "na", alt: [] },
   { name: "south africa",                                 iso: "za", alt: [] },
   { name: "egypt",                                        iso: "eg", alt: [] },
-  { name: "tanzania, united republic of",                 iso: "tz", alt: [] },
+  { name: "tanzania",                                     iso: "tz", alt: ["tanzania, united republic of"] },
   { name: "equatorial guinea",                            iso: "gq", alt: [] },
   { name: "lesotho",                                      iso: "ls", alt: [] },
   { name: "burundi",                                      iso: "bi", alt: [] },
