@@ -9,7 +9,7 @@ function remove_style(countrycode) {
     return;
   }
   var svgstyle = svgobject.firstChild.nodeValue;
-  var re = new RegExp("^\." + countrycode, "mg");
+  var re = new RegExp("^\\." + countrycode, "mg");
   var pos = svgstyle.search(re);
   if(pos != -1) {
     var lhs = svgstyle.substring(0, pos);
@@ -29,7 +29,7 @@ function set_style(countrycode, style) {
     alert("svg tmp style not found");
   }
 
-  var re = new RegExp("^\." + countrycode, "mg");
+  var re = new RegExp("^\\." + countrycode, "mg");
   const newstyle = '\n.' + countrycode + ' {\n' + style + '\n}\n';
   if(svgobject.firstChild) {
     var svgstyle = svgobject.firstChild.nodeValue;
@@ -43,7 +43,7 @@ function set_style(countrycode, style) {
 }
 
 var last_guess_country = '';
-var guesses = {};
+var answers = {};
 var result_mode = false;
 
 // TODO alt
@@ -129,7 +129,7 @@ function next(event, last_country) {
       if(countries[i].iso == last_country) {
         ++i;
         for(; i < countries.length; ++i) {
-          if(!guesses[countries[i].iso]) {
+          if(!answers[countries[i].iso]) {
             break;
           }
         }
@@ -140,7 +140,7 @@ function next(event, last_country) {
   }
   else {
     for(var i = 0; i < countries.length; ++i) {
-      if(!guesses[countries[i].iso]) {
+      if(!answers[countries[i].iso]) {
         break;
       }
     }
@@ -169,7 +169,7 @@ function giveguess(event, countrycode) {
 
   var label = document.createElementNS(xhtmluri, "label");
   label.setAttribute("for", "countryname_input");
-  label.appendChild(document.createTextNode("Your guess"));
+  label.appendChild(document.createTextNode("What is the name of the selected country?"));
   form.appendChild(label);
 
   form.appendChild(document.createElementNS(xhtmluri, "br"));
@@ -180,8 +180,8 @@ function giveguess(event, countrycode) {
   input.setAttribute("id", "countryname_input");
   input.setAttribute("autofocus", "autofocus"); // html5
   input.setAttribute("placeholder", "country name"); // html5
-  if(guesses[countrycode]) {
-    input.setAttribute("value", guesses[countrycode]);
+  if(answers[countrycode]) {
+    input.setAttribute("value", answers[countrycode]);
   }
   form.appendChild(input);
 
@@ -219,12 +219,6 @@ function giveguess(event, countrycode) {
   set_style(countrycode, "fill: lightblue;");
 }
 
-function submit_guess_key(event, countrycode) {
-  if(event.keyCode == 13) {
-    submit_guess(countrycode);
-  }
-}
-
 function submit_guess(countrycode) {
   var guess = document.getElementById("countryname_input");
   close_guess_dialog(countrycode);
@@ -232,12 +226,18 @@ function submit_guess(countrycode) {
   if(!guess) {
     alert("countryname_input not found");
   }
-  if(guess.value == null || guess.value == '') {
-    delete guesses[countrycode];
+  if(guess.value === null || guess.value == '') {
+    delete answers[countrycode];
   }
   else {
-    guesses[countrycode] = guess.value;
+    answers[countrycode] = guess.value;
     set_style(countrycode, "fill: Lavender;");
+  }
+}
+
+function submit_guess_key(event, countrycode) {
+  if(event.keyCode == 13) {
+    submit_guess(countrycode);
   }
 }
 
@@ -270,8 +270,8 @@ function show_solution(event, countrycode) {
     close_guess_dialog(last_guess_country);
     // restore correct color
     var oldcountry = get_country(last_guess_country);
-    if(guesses[oldcountry.iso]) {
-      if(check_guess(guesses[oldcountry.iso], oldcountry)) {
+    if(answers[oldcountry.iso]) {
+      if(check_guess(answers[oldcountry.iso], oldcountry)) {
         set_style(oldcountry.iso, "fill: Green;");
       }
       else {
@@ -301,15 +301,15 @@ function show_solution(event, countrycode) {
   }
 
   div.appendChild(document.createTextNode(text));
-  if(guesses[country.iso]) {
+  if(answers[country.iso]) {
     var sol = document.createElementNS(xhtmluri, "span");
-    if(check_guess(guesses[country.iso], country)) {
+    if(check_guess(answers[country.iso], country)) {
       sol.setAttribute("class", "correct");
       sol.appendChild(document.createTextNode("Your solution was correct!"));
     }
     else {
       sol.setAttribute("class", "wrong");
-      sol.appendChild(document.createTextNode("Your solution " + guesses[country.iso] + " was wrong!"));
+      sol.appendChild(document.createTextNode("Your solution " + answers[country.iso] + " was wrong!"));
     }
     div.appendChild(document.createElementNS(xhtmluri, "br"));
     div.appendChild(sol);
@@ -324,10 +324,10 @@ function show_solution(event, countrycode) {
   set_style(countrycode, "fill: lightblue;");
 }
 
-function number_of_guesses() {
+function number_of_answers() {
   var len = 0;
-  for(var i in guesses) {
-    if(guesses.hasOwnProperty(i)) {
+  for(var i in answers) {
+    if(answers.hasOwnProperty(i)) {
       ++len;
     }
   }
@@ -335,7 +335,7 @@ function number_of_guesses() {
 }
 
 function check() {
-  if(number_of_guesses() == 0) {
+  if(number_of_answers() === 0) {
     alert("you should at least try to guess one country name!");
     return;
   }
@@ -348,8 +348,8 @@ function check() {
   var wrong = 0;
 
   for(var i = 0; i < countries.length; ++i) {
-    if(guesses[countries[i].iso]) {
-      if(check_guess(guesses[countries[i].iso], countries[i])) {
+    if(answers[countries[i].iso]) {
+      if(check_guess(answers[countries[i].iso], countries[i])) {
         set_style(countries[i].iso, "fill: Green;");
         ++correct;
       }
@@ -368,24 +368,24 @@ function check() {
 
   var correct_html = document.createElementNS(xhtmluri, "span");
   correct_html.setAttribute("class", "correct");
-  correct_html.appendChild(document.createTextNode("" + correct +
-                                                   " countries (" + Math.round(correct/countries.length*100) +
-                                                   "%) correct"));
+  correct_html.appendChild(document.createTextNode("" + correct + " " + (correct > 1 ? "countries" : "country") +
+                                                   " (" + Math.round(correct/countries.length*100) + "%) correct"));
   text.appendChild(correct_html);
   text.appendChild(document.createTextNode(" and "));
   var wrong_html = document.createElementNS(xhtmluri, "span");
   wrong_html.setAttribute("class", "wrong");
-  wrong_html.appendChild(document.createTextNode("" + wrong +
-                                                 " countries (" + Math.round(wrong/countries.length*100) + "%) wrong"));
+  wrong_html.appendChild(document.createTextNode("" + wrong + " " + (wrong > 1 ? "countries" : "country") +
+                                                 " (" + Math.round(wrong/countries.length*100) + "%) wrong"));
   text.appendChild(wrong_html);
   text.appendChild(document.createTextNode(" and "));
   var missing = (countries.length - correct - wrong);
   var missing_html = document.createElementNS(xhtmluri, "span");
   missing_html.setAttribute("class", "missing");
-  missing_html.appendChild(document.createTextNode("failed to provide a guess for " + missing + " countries ("
-                                                   + Math.round(missing/countries.length*100) + "%)"));
+  missing_html.appendChild(document.createTextNode("failed to provide a guess for " + missing + " " +
+                                                   (missing > 1 ? "countries" : "country") +
+                                                   " (" + Math.round(missing/countries.length*100) + "%)"));
   text.appendChild(missing_html);
-  text.appendChild(document.createTextNode(" out of " + countries.length + " countries (percentages are rounded)"));
+  text.appendChild(document.createTextNode(" out of " + countries.length + " countries. (percentages are rounded)"));
 
   var form = document.createElementNS(xhtmluri, "form");
   var restart = document.createElementNS(xhtmluri, "input");
@@ -416,7 +416,7 @@ function restart_quiz() {
     result_div.removeChild(result_div.firstChild);
   }
 
-  guesses = {};
+  answers = {};
 
   close_guess_dialog(last_guess_country);
   last_guess_country = '';
