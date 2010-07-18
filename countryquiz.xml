@@ -3,6 +3,11 @@
   <head>
     <title>Country Quiz: Africa</title>
     <style type="text/css">
+      #guess_box {
+        background-color:white;
+        border: 1px solid black;
+        padding: 2px;
+      }
     </style>
     <script src="countryquiz.js" type="text/javascript"></script>
   </head>
