@@ -15,6 +15,7 @@ function svg_style(countrycode, style) {
 
 var last_guess_country = '';
 var guesses = {};
+var result_mode = false;
 
 // TODO alt
 const countries = [
@@ -91,6 +92,10 @@ function close_guess_dialog(countrycode) {
 }
 
 function giveguess(event, countrycode) {
+  if(result_mode) {
+    return;
+  }
+
   close_guess_dialog(last_guess_country);
   last_guess_country = countrycode;
 
@@ -164,12 +169,76 @@ function submit_guess(countrycode) {
 }
 
 function check() {
-  for(var countrycode in guesses) {
-    svg_style(countrycode, "fill: Green;");
+  result_mode = true;
+
+  var correct = 0;
+  var wrong = 0;
+
+  for each(var country in countries) {
+    if(guesses[country.iso]) {
+      if(guesses[country.iso] == country.name) { // TODO lowercase and alt!
+        svg_style(country.iso, "fill: Green;");
+        ++correct;
+      }
+      else {
+        svg_style(country.iso, "fill: Red;");
+        ++wrong;
+      }
+    }
+    else {
+      svg_style(country.iso, "fill: Tomato;");
+    }
   }
+
+  var text = document.createElementNS(xhtmluri, "p");
+  text.appendChild(document.createTextNode("You guessed "));
+
+  var correct_html = document.createElementNS(xhtmluri, "span");
+  correct_html.setAttribute("id", "correct");
+  correct_html.appendChild(document.createTextNode("" + correct + " (" + (correct/countries.length*100) + "%) correct"));
+  text.appendChild(correct_html);
+  text.appendChild(document.createTextNode(" and "));
+  var wrong_html = document.createElementNS(xhtmluri, "span");
+  wrong_html.setAttribute("id", "wrong");
+  wrong_html.appendChild(document.createTextNode("" + wrong + " (" + (wrong/countries.length*100) + "%) wrong"));
+  text.appendChild(wrong_html);
+  text.appendChild(document.createTextNode(" out of " + countries.length + " countries"));
+
+  var form = document.createElementNS(xhtmluri, "form");
+  var restart = document.createElementNS(xhtmluri, "input");
+  restart.setAttribute("type", "submit");
+  restart.setAttribute("value", "Restart Quiz");
+  restart.setAttribute("class", "btn");
+  restart.setAttribute("onclick", "restart_quiz()");
+  form.appendChild(restart);
+
+  var result_box = document.createElementNS(xhtmluri, "result_box");
+  result_box.setAttribute("id", "result_box");
+  result_box.appendChild(text);
+  result_box.appendChild(form);
 
   var result_div = document.getElementById("result");
   if(!result_div) {
     alert("couldn't find div#result");
   }
+  result_div.appendChild(result_box);
+}
+
+function restart_quiz() {
+  var result_div = document.getElementById("result");
+  if(!result_div) {
+    alert("couldn't find div#result");
+  }
+  while(result_div.childNodes.length >= 1) {
+    result_div.removeChild(result_div.firstChild);
+  }
+
+  guesses = {};
+  last_guess_country = '';
+
+  for each(var country in countries) {
+    svg_style(country.iso);
+  }
+
+  result_mode = false;
 }
