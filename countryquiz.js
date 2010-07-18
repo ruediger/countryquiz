@@ -16,6 +16,63 @@ function svg_style(countrycode, style) {
 var last_guess_country = '';
 var guesses = {};
 
+const countries = [
+  { name: "burkina faso",                                 iso: "bf", alt: [] },
+  { name: "libyan arab jamahiriya",                       iso: "ly", alt: [] },
+  { name: "madagascar",                                   iso: "mg", alt: [] },
+  { name: "cote d'ivoire",                                iso: "ci", alt: ["côte d'ivoire"] },
+  { name: "algeria",                                      iso: "dz", alt: [] },
+  { name: "cameroon",                                     iso: "cm", alt: [] },
+  { name: "botswana",                                     iso: "bw", alt: [] },
+  { name: "kenya",                                        iso: "ke", alt: [] },
+  { name: "sierra leone",                                 iso: "sl", alt: [] },
+  { name: "mali",                                         iso: "ml", alt: [] },
+  { name: "congo, the democratic republic of the",        iso: "cd", alt: [] },
+  { name: "somalia",                                      iso: "so", alt: [] },
+  { name: "guinea-bissau",                                iso: "gw", alt: [] },
+  { name: "ghana",                                        iso: "gh", alt: [] },
+  { name: "uganda",                                       iso: "ug", alt: [] },
+  { name: "mozambique",                                   iso: "mz", alt: [] },
+  { name: "mauritania",                                   iso: "mr", alt: [] },
+  { name: "angola",                                       iso: "ao", alt: [] },
+  { name: "sudan",                                        iso: "sd", alt: [] },
+  { name: "niger",                                        iso: "ne", alt: [] },
+  { name: "zambia",                                       iso: "zm", alt: [] },
+  { name: "ethiopia",                                     iso: "et", alt: [] },
+  { name: "western sahara",                               iso: "eh", alt: [] },
+  { name: "chad",                                         iso: "td", alt: [] },
+  { name: "guinea",                                       iso: "gn", alt: [] },
+  { name: "nigeria",                                      iso: "ng", alt: [] },
+  { name: "tunisia",                                      iso: "tn", alt: [] },
+  { name: "namibia",                                      iso: "na", alt: [] },
+  { name: "south africa",                                 iso: "za", alt: [] },
+  { name: "egypt",                                        iso: "eg", alt: [] },
+  { name: "tanzania, united republic of",                 iso: "tz", alt: [] },
+  { name: "equatorial guinea",                            iso: "gq", alt: [] },
+  { name: "lesotho",                                      iso: "ls", alt: [] },
+  { name: "burundi",                                      iso: "bi", alt: [] },
+  { name: "djibouti",                                     iso: "dj", alt: [] },
+  { name: "congo",                                        iso: "cg", alt: [] },
+  { name: "rwanda",                                       iso: "rw", alt: [] },
+  { name: "senegal",                                      iso: "sn", alt: [] },
+  { name: "togo",                                         iso: "tg", alt: [] },
+  { name: "gabon",                                        iso: "ga", alt: [] },
+  { name: "malawi",                                       iso: "mw", alt: [] },
+  { name: "morocco",                                      iso: "ma", alt: [] },
+  { name: "liberia",                                      iso: "lr", alt: [] },
+  { name: "central african republic",                     iso: "cf", alt: [] },
+  { name: "zimbabwe",                                     iso: "zw", alt: [] },
+  { name: "benin",                                        iso: "bj", alt: [] },
+  { name: "eritrea",                                      iso: "er", alt: [] },
+  { name: "swaziland",                                    iso: "sz", alt: [] },
+  { name: "gambia",                                       iso: "gm", alt: [] },
+  { name: "cape verde",                                   iso: "cv", alt: [] },
+  { name: "comoros",                                      iso: "km", alt: [] },
+  { name: "mauritius",                                    iso: "mu", alt: [] },
+  { name: "sao tome and principe",                        iso: "st", alt: [] },
+  { name: "seychelles",                                   iso: "sc", alt: [] }
+];
+
 function close_guess_dialog(countrycode) {
   if(!countrycode || countrycode == '') {
     return;
@@ -92,6 +149,7 @@ function giveguess(event, countrycode) {
 function submit_guess(countrycode) {
   var guess = document.getElementById("countryname_input");
   close_guess_dialog(countrycode);
+  last_guess_country = '';
   if(!guess) {
     alert("countryname_input not found");
   }
@@ -105,16 +163,12 @@ function submit_guess(countrycode) {
 }
 
 function check() {
-/*  for(var countrycode in guesses) {
-    var svgobject = document.getElementById(countrycode);
-    if(!svgobject) {
-      alert("object with id " + countrycode + " not found");
-    }
-    svgobject.setAttribute("style", "fill: Lavender;");
+  for(var countrycode in guesses) {
+    svg_style(countrycode, "fill: Green;");
   }
 
   var result_div = document.getElementById("result");
   if(!result_div) {
     alert("couldn't find div#result");
-  }*/
+  }
 }
