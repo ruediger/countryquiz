@@ -168,6 +168,19 @@ function submit_guess(countrycode) {
   }
 }
 
+function check_guess(guess_, country) {
+  var guess = guess_.toLocaleLowerCase();
+  if(guess == country.name) {
+    return true;
+  }
+  for each(var alt in country.alt) {
+    if(guess == alt) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function check() {
   result_mode = true;
 
@@ -176,7 +189,7 @@ function check() {
 
   for each(var country in countries) {
     if(guesses[country.iso]) {
-      if(guesses[country.iso] == country.name) { // TODO lowercase and alt!
+      if(check_guess(guesses[country.iso], country)) {
         svg_style(country.iso, "fill: Green;");
         ++correct;
       }
@@ -195,12 +208,14 @@ function check() {
 
   var correct_html = document.createElementNS(xhtmluri, "span");
   correct_html.setAttribute("id", "correct");
-  correct_html.appendChild(document.createTextNode("" + correct + " (" + (correct/countries.length*100) + "%) correct"));
+  correct_html.appendChild(document.createTextNode("" + correct +
+                                                   " (" + Math.round(correct/countries.length*100) + "%) correct"));
   text.appendChild(correct_html);
   text.appendChild(document.createTextNode(" and "));
   var wrong_html = document.createElementNS(xhtmluri, "span");
   wrong_html.setAttribute("id", "wrong");
-  wrong_html.appendChild(document.createTextNode("" + wrong + " (" + (wrong/countries.length*100) + "%) wrong"));
+  wrong_html.appendChild(document.createTextNode("" + wrong +
+                                                 " (" + Math.round(wrong/countries.length*100) + "%) wrong"));
   text.appendChild(wrong_html);
   text.appendChild(document.createTextNode(" out of " + countries.length + " countries"));
 
