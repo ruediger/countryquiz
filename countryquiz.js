@@ -132,6 +132,9 @@ function next(event, last_country) {
             break;
           }
         }
+        if(i == countries.length) { // start again by 0
+          next(event);
+        }
         giveguess(event, countries[i].iso);
         return;
       }
