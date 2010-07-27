@@ -302,6 +302,7 @@
     <div id="endsubmit">
       <form>
         <input type="button" class="btn" value="Check Answers" onclick="check();"/>
+        <input type="button" class="btn" value="Next Country" onclick="next(Event);"/>
       </form>
     </div>
   </body>
