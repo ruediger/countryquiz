@@ -50,7 +50,7 @@
   <body>
     <h1>Welcome to Country Quiz: Africa</h1>
     <div id="introduction">
-      Click on the countries and try to guess the name. Click &quot;Check Answers&quot; to submit your final answers.
+      Click on the countries and try to guess the name. Click &quot;<i>Check Answers</i>&quot; to submit your final answers.
     </div>
     <div id="sol">
       <span id="solutions"></span>
