@@ -311,11 +311,11 @@ function show_solution(event, countrycode) {
     var sol = document.createElementNS(xhtmluri, "span");
     if(check_guess(answers[country.iso], country)) {
       sol.setAttribute("class", "correct");
-      sol.appendChild(document.createTextNode("Your solution was correct!"));
+      sol.appendChild(document.createTextNode("Your answer was correct!"));
     }
     else {
       sol.setAttribute("class", "wrong");
-      sol.appendChild(document.createTextNode("Your solution '" + answers[country.iso] + "' was wrong!"));
+      sol.appendChild(document.createTextNode("Your answer '" + answers[country.iso] + "' was wrong!"));
     }
     div.appendChild(document.createElementNS(xhtmluri, "br"));
     div.appendChild(sol);
