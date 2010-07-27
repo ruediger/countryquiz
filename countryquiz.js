@@ -341,6 +341,10 @@ function number_of_answers() {
 }
 
 function check() {
+  if(result_mode) {
+    return;
+  }
+
   close_guess_dialog(last_guess_country);
 
   if(number_of_answers() === 0) {
