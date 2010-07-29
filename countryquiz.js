@@ -88,7 +88,7 @@ const countries = [
   { name: "togo",                             iso: "tg", alt: ["the togolese republic", "république togolaise"] },
   { name: "gabon",                            iso: "ga", alt: ["gabonese republic", "république gabonaise", /*de*/"gabun"] },
   { name: "malawi",                           iso: "mw", alt: ["nyasaland", "republic of malawi", "republic of malaŵi", "chalo cha malawi", "dziko la malaŵi"] },
-  { name: "morocco",                          iso: "ma", alt: ["kingdom of morocco", "amerruk", "murakuc"] },
+  { name: "morocco",                          iso: "ma", alt: ["kingdom of morocco", "amerruk", "murakuc", /*de*/"marokko"] },
   { name: "liberia",                          iso: "lr", alt: ["republic of liberia"] },
   { name: "central african republic",         iso: "cf", alt: ["car", "centrafrique", "république centrafricaine", "ködörösêse tî bêafrîka", /*de*/"zentralafrikanische republik"] },
   { name: "zimbabwe",                         iso: "zw", alt: ["republic of zimbabwe", "southern rhodesia", "republic of rhodesia", "zimbabwe rhodesia", "simbabwe"] },
