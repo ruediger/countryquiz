@@ -311,7 +311,7 @@
       </form>
     </div>
     <div id="footer">
-      The map is taken from <a href="http://commons.wikimedia.org/wiki/File:BlankMap-Africa.svg">Wikimedia Commons: BlankMap-Africa.svg</a> and licensed under Public Domain and CC-BY-SA-2.5. Thanks to <a href="http://commons.wikimedia.org/wiki/User:Lokal_Profil">User:Lokal Profil</a> for his great work.
+      The map is taken from <a href="http://commons.wikimedia.org/wiki/File:BlankMap-Africa.svg">Wikimedia Commons: BlankMap-Africa.svg</a> and licensed under Public Domain and CC-BY-SA-2.5. Thanks to <a href="http://commons.wikimedia.org/wiki/User:Lokal_Profil">User:Lokal Profil</a> for his great work. The Quiz only runs inside the browser and the server connection is not necessary. You can simply copy the code or checkout the latest development from <a href="http://github.com/ruediger/countryquiz">github</a>.
     </div>
   </body>
 </html>

@@ -1,0 +1,7 @@
+countryquiz is a quiz based on xhtml, svg and javascript. It completely runs inside the browser and does not need a server backend. Currently only a map of Africa is supported.
+
+You can checkout the quiz at http://ruediger.pseudoterminal.org/countryquiz/
+
+It was tested with Firefox 3.6, Iceweasle (Firefox) 3.5, Chrome 5, Opera 10.
+
+The map was taken from http://commons.wikimedia.org/wiki/File:BlankMap-Africa.svg
