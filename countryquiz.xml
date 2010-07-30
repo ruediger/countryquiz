@@ -44,6 +44,11 @@
         margin-top: 10px;
         margin-bottom: 10px;
       }
+      #footer {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 75%;
+      }
     </style>
     <script src="countryquiz.js" type="text/javascript" />
   </head>
@@ -304,6 +309,9 @@
         <input type="button" class="btn" value="Check Answers" onclick="check();"/>
         <input type="button" class="btn" value="Next Country" onclick="next(Event);"/>
       </form>
+    </div>
+    <div id="footer">
+      The map is taken from <a href="http://commons.wikimedia.org/wiki/File:BlankMap-Africa.svg">Wikimedia Commons: BlankMap-Africa.svg</a> and licensed under Public Domain and CC-BY-SA-2.5. Thanks to <a href="http://commons.wikimedia.org/wiki/User:Lokal_Profil">User:Lokal Profil</a> for his great work.
     </div>
   </body>
 </html>
