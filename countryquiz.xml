@@ -61,7 +61,7 @@
       <span id="solutions"></span>
       <form>
         <input type="button" class="btn" value="Check Answers" onclick="check();"/>
-        <input type="button" class="btn" value="Next Country" onclick="next(Event);"/>
+        <input type="button" class="btn" value="Next Country" onclick="next();"/>
       </form>
     </div>
     <div id="result"></div>
@@ -307,7 +307,7 @@
     <div id="endsubmit">
       <form>
         <input type="button" class="btn" value="Check Answers" onclick="check();"/>
-        <input type="button" class="btn" value="Next Country" onclick="next(Event);"/>
+        <input type="button" class="btn" value="Next Country" onclick="next();"/>
       </form>
     </div>
     <div id="footer">

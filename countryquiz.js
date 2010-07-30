@@ -160,7 +160,12 @@ function giveguess(event, countrycode) {
   last_guess_country = countrycode;
 
   var div = document.createElementNS(xhtmluri, "div");
-  div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  if(event && event.clientX) {
+    div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  }
+  else {
+    div.setAttribute("style", 'position:fixed; left:5px; top:5px;');
+  }
   div.setAttribute("id", "guess_box");
   // div {
   var form = document.createElementNS(xhtmluri, "form");
@@ -291,6 +296,9 @@ function show_solution(event, countrycode) {
   var div = document.createElementNS(xhtmluri, "div");
   if(event && event.clientX) {
     div.setAttribute("style", 'position:absolute; left:' + event.clientX + 'px; top: ' + event.clientY + 'px;');
+  }
+  else {
+    div.setAttribute("style", 'position:fixed; left:5px; top:5px;');
   }
   div.setAttribute("id", "solution_box");
   
