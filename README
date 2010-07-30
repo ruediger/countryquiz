@@ -1,4 +1,4 @@
-countryquiz is a quiz based on xhtml, svg and javascript. It completely runs inside the browser and does not need a server backend. Currently only a map of Africa is supported.
+countryquiz is a quiz based on xhtml, svg and javascript. It completely runs inside the browser and does not need a server backend. Only countryquiz.xml and countryquiz.js are needed. Currently only a map of Africa is supported.
 
 You can checkout the quiz at http://ruediger.pseudoterminal.org/countryquiz/
 
